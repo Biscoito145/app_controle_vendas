@@ -8,6 +8,7 @@ from bannervenda import BannerVenda
 from functools import partial
 from myfirebase import MyFirebase
 from bannervendedor import BannerVendedor
+from datetime import datetime
 GUI = Builder.load_file('main.kv')
 
 
@@ -361,5 +362,17 @@ class MainApp(App):
         foto_perfil.source = f"icones/fotos_perfil/{dic_info_vendededor['avatar']}"
 
         self.mudar_tela("vendasoutrovendedorpage")
+
+    def ajustar_data(self):
+        data = datetime.now()
+        data = data.strftime("%d/%m/%Y")
+        pagina_adicionarvendedorespage = self.root.ids["adicionarvendaspage"]
+        label_data = pagina_adicionarvendedorespage.ids["label_data"]
+        label_data.text = f"Data: {data}"
+
+    def adicionar_venda_data(self):
+        self.ajustar_data()
+        self.mudar_tela("adicionarvendaspage")
+
 
 MainApp().run()
